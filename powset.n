@@ -1,0 +1,6 @@
+[inputs]
+min_value = 1
+max_value = 16
+
+
+output_format = "Write the powerset P({first}, {second})"

@@ -1,0 +1,5 @@
+[inputs]
+min_value = 1
+max_value = 9
+
+output_format = "Conside the relation R = ({a},{b}),({c},{d}),({e},{f}),({g},{h}),({i},{j}),({k},{l}) on domain {1,...,7} and codomain {x},{y},{z}. What are the multiplicites of R" 

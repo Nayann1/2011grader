@@ -1,0 +1,7 @@
+[inputs]
+min_dollar = 0
+max_dollar = 500
+min_value = 0
+max_value = 1
+
+output_format = " If you invest in a stock that will return {doll_value1} with probability {p1} or {doll_value2} with probability {p2}, what is your expected return?"

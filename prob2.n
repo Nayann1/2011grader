@@ -1,0 +1,5 @@
+[inputs]
+min_value = 0
+max_value = 1
+
+output_format = "Pr[A] = {first_val}, Pr[B] = {second_val}, Events A and B are independent. What is Pr[A or B]"

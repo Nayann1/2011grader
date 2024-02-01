@@ -1,0 +1,6 @@
+[inputs]
+min_value = 0
+max_value = 10000
+
+
+output_format = "Write the set of digits in the number {val} in roster notation"

@@ -1,0 +1,5 @@
+[inputs]
+min_value = 1
+max_value = 9
+
+output_format = "If there are {a} blue marbles, {b} red marbles, and {c} green marbles, what is the probability of picking a {random_color} marble?"

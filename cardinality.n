@@ -1,0 +1,6 @@
+[inputs]
+min_value = 0
+max_value = 100
+
+
+output_format = "Given |A| = {first} and |B| = {second}, compute |AxB|"

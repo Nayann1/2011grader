@@ -1,0 +1,6 @@
+[inputs]
+min_value = 1
+max_value = 9
+
+
+output_format = "Write the set {a}, {b}, {c}, {d}, {e}, {f} and {w} {x} {y} {z} in roster notation" 

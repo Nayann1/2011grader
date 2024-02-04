@@ -1,5 +1,16 @@
 [inputs]
 min_value = 0
 max_value = 1
+operators = ["or", "and"]
 
-output_format = "Pr[A] = {first_val}, Pr[B] = {second_val}, Events A and B are independent. What is Pr[A or B]"
+first_val = random_float(0,1)
+second_val = random_float(0,1)
+third_val = random_float(0,1)
+
+op1 = choose_random(operators)
+op2 = choose_random(operators)
+
+three_events = random(0,1)
+
+
+output_format = "Pr[A] = {first_val}, Pr[B] = {second_val}, Pr[C] = {third_val}, Events A B and C are independent. What is Pr[A {op1} B {op2} C]"  else "Pr[A] = {first_val}, Pr[B] = {second_val}, Events A and B are independent. What is Pr[A {op1} B]"

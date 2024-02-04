@@ -2,5 +2,8 @@
 min_value = 0
 max_value = 100
 
+A = random(min_value, max_value)
+B = random(min_value, max_value)
 
-output_format = "Given |A| = {first} and |B| = {second}, compute |AxB|"
+
+output_format = "Given |A| = {A} and |B| = {B}, compute |AxB|"

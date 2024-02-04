@@ -1,0 +1,12 @@
+[inputs]
+operators = ["and", "or", "\"]
+
+operator1 = choose_random(operators)
+operator2 = choose_random(operators)
+
+
+parens = random(0,1)
+
+expression = "A {operator1} (B {operator2} C)" if parens else "A {operator1} B {operator2} C"
+
+#ALSO a rough file need to generate steps.

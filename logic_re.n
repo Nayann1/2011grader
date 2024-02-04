@@ -1,0 +1,14 @@
+[inputs]
+variables = ["p", "q", "r"]
+operators = ["and", "or", "not"]
+
+slot1 = choose_random(variables)
+operator1 = choose_random(operators)
+slot2 = choose_random(variables)
+operator2 = choose_random(operators)
+slot3 = choose_random(variables)
+operator3 = choose_random(operators)
+
+expression = "{slot1}{operator1}{slot2}{operator2}{slot3}{operator3}"
+
+#THIS NEEDS LOTS OF WORK THIS IS A VERY ROUGH FILE CURRENTLY

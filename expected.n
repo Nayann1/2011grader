@@ -4,4 +4,10 @@ max_dollar = 500
 min_value = 0
 max_value = 1
 
-output_format = " If you invest in a stock that will return {doll_value1} with probability {p1} or {doll_value2} with probability {p2}, what is your expected return?"
+doll_value1 = random(min_dollar, max_dollar)
+doll_value2 = random(min_dollar, max_dollar)
+
+p1 = random_float(0,1)
+p2 = 1-p1
+
+output_format = "If you invest in a stock that will return {doll_value1} with probability {p1} or {doll_value2} with probability {p2}, what is your expected return?"

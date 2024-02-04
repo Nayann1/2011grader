@@ -2,4 +2,12 @@
 min_value = 1
 max_value = 9
 
-output_format = "If there are {a} blue marbles, {b} red marbles, and {c} green marbles, what is the probability of picking a {random_color} marble?"
+marble_colors = ["blue", "red", "green"]
+
+val1 = random(min_value, max_value)
+val2 = random(min_value, max_value)
+val3 = random(min_value, max_value)
+
+color_wanted = choose_random(marble_colors)
+
+output_format = "If there are {val1} blue marbles, {val2} red marbles, and {val3} green marbles, what is the probability of picking a {color_wanted} marble?"

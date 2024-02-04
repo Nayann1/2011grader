@@ -1,6 +1,16 @@
 [inputs]
 min_value = 0
-max_value = 10000
+max_value = 9
+
+set_length1 = random(1, 7)
+set_length2 = random(1, 7)
+
+set1 = random_unique(min_value, max_value, set_length1)
+set2 = random_unique(min_value, max_value, set_length2)
+
+bool_or_and = random(0, 1)
+
+orand =  "or" if bool_or_and else "and"
 
 
-output_format = "Write the set of digits in the number {val} in roster notation"
+output_format = "Write the set {set1} {orand} {set2} in roster notation"

@@ -2,5 +2,7 @@
 min_value = 1
 max_value = 16
 
+value1 = random(min_value, max_value)
+value2 = random(min_value, max_value)
 
-output_format = "Write the powerset P({first}, {second})"
+output_format = "Write the powerset P({value1}, {value2}) in roster notation"

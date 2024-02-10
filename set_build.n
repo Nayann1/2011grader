@@ -1,5 +1,9 @@
 [inputs]
-operators = ["and", "or", "\"]
+constructors = ["A","B","C", "\\lnot _", "_ \\wedge _", "_ \\vee _",]
+//How to include elemeent etc.
+rules = ["e|e \u2208 A \\wedge(e \u2208 B\\vee e \u2208 C)", "e|e \u2208 A \\wedge e \u2208 (B \\vee C)", "e|e \u2208 A \\wedge e \u2209 B \\wedge e \u2208 C", "e|e \u2208 (A\B) \\wedge e \u2208 C"]
+
+
 
 operator1 = choose_random(operators)
 operator2 = choose_random(operators)
@@ -9,4 +13,4 @@ parens = random(0,1)
 
 expression = "A {operator1} (B {operator2} C)" if parens else "A {operator1} B {operator2} C"
 
-#ALSO a rough file need to generate steps.
+proof1, proof2 = random_unique(rules, 2)

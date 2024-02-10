@@ -4,6 +4,7 @@ max_domain = 6
 min_codomain = 0
 max_codomain = 6
 
+
 R = [random_unique((random(min_domain, max_domain), random(min_codomain, max_codomain)), num_tuples) for z in range(6)]
 
 output_format = "Consider the relation R = {R} on Domain [{min_domain} ..., {max_domain}] and codomain [{min_codomain} ..., {max_codomain}]. What are the multiplicites of R?"

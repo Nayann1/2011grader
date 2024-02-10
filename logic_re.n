@@ -1,6 +1,8 @@
 [inputs]
-variables = ["p", "q", "r"]
-operators = ["and", "or", "not"]
+constructors = ["p", "q", "r", "true", "false", "\\lnot _", "_ \\wedge _", "_ \\vee _", "_ \\Rightarrow _"]
+rules = ["\\lnot (a \\wedge b) = (\\lnot a) \\vee (\\lnot b)", "\\lnot (a \\vee b) = (\\lnot a) \\wedge (\\lnot b)", "a \\wedge (b \\vee c) = (a \\wedge b) \\vee (a \\wedge c)", "a \\vee (b \\wedge c) = (a \\vee b) \\wedge (a \\vee c)", "\\lnot\\lnot a = a"]
+
+proof = generate_proof(constructors, rules, min_steps=5, min_expression_size=5)
 
 slot1 = choose_random(variables)
 operator1 = choose_random(operators)
@@ -11,4 +13,3 @@ operator3 = choose_random(operators)
 
 expression = "{slot1}{operator1}{slot2}{operator2}{slot3}{operator3}"
 
-#THIS NEEDS LOTS OF WORK THIS IS A VERY ROUGH FILE CURRENTLY

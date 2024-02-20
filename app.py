@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import json
+import re
 import powset
 app = Flask(__name__)
 
@@ -13,20 +14,35 @@ def index():
 def serve_app():
     form_data = request.form
     ex_value = form_data.get('ex')
+    final_json = powset.calc_powset()
+    z = json.loads(final_json)
+    print(z)
     if (ex_value):
-        #print(form_data)
-        json_data = json.loads(ex_value)
+        new_content = z["rExercises"][0]['eQuestion'][1]['contents']
+        pattern = r'\d+'
+        numbers = re.findall(pattern, new_content)
+        print(numbers)
 
+        temp = '\\left\\{\\left\\{\\right\\}, \\left\\{x\\right\\}, \\left\\{y\\right\\}, \\left\\{x, y\\right\\}\\right\\}'
+        for c in temp:
+            if c == 'x':
+                temp = temp.replace(c, numbers[0])
+            if c == 'y':
+                temp = temp.replace(c, numbers[1])
+
+        print(temp)        
+        json_data = json.loads(ex_value)
+        
         roster_value = json_data['cValue']['roster']
         #print(roster_value)
-        mydata = {'rPages': [], 'rExercises': [], 'rSplash': {'tag': 'SplashPR', 'contents': {'prOutcome': 'POIncorrect', 'prFeedback': [{'tag': 'FText', 'contents': 'In roster notation, '}, {'tag': 'FText', 'contents': 'the powerset 𝒫'}, {'tag': 'FMath', 'contents': '(\\left\\{0,1\\right\\})'}, {'tag': 'FText', 'contents': ' is  '}, {'tag': 'FMath', 'contents': '\\left\\{\\left\\{\\right\\}, \\left\\{0\\right\\}, \\left\\{1\\right\\}, \\left\\{0, 1\\right\\}\\right\\}'}, {'tag': 'FText', 'contents': 'Your answer was '}, {'tag': 'FMath', 'contents': str(roster_value)}], 'prTimeToRead': 9}}, 'rSes': '', 'rCurrentPage': None, 'rLogin': None, 'rEcho': None, 'rProgress': None, 'rDone': False}
+        mydata = {'rPages': [], 'rExercises': [], 'rSplash': {'tag': 'SplashPR', 'contents': {'prOutcome': 'POIncorrect', 'prFeedback': [{'tag': 'FText', 'contents': 'In roster notation, '}, {'tag': 'FText', 'contents': 'the powerset 𝒫'}, {'tag': 'FMath', 'contents': new_content}, {'tag': 'FText', 'contents': ' is  '}, {'tag': 'FMath', 'contents': temp}, {'tag': 'FText', 'contents': 'Your answer was '}, {'tag': 'FMath', 'contents': str(roster_value)}], 'prTimeToRead': 9}}, 'rSes': '', 'rCurrentPage': None, 'rLogin': None, 'rEcho': None, 'rProgress': None, 'rDone': False}
         
         return json.dumps(mydata)
         #print(form_data)
         #print(ex_value)
         #json_data = json.loads(ex_value)
-    final_json = powset.calc_powset()
     
+    return final_json
     #roster_value = json_data['cValue']['roster']
     #
     #
@@ -35,7 +51,7 @@ def serve_app():
     #x = '{"rPages":[],"rExercises":[{"eTopic":"Powerset operations","eQuestion":[{"tag":"FText","contents":"Write the powerset 𝒫"},{"tag":"FMath","contents":"(\\\\left\\\\{9,6\\\\right\\\\})"},{"tag":"FText","contents":" in roster notation"},{"tag":"FFieldMath","contents":"roster"}],"eActions":[{"tag":"Check"}],"eHidden":[{"tag":"FValueS","fvName":"tag","fvValS":"ExerciseType"},{"tag":"FValue","fvName":"exId","fvVal":0},{"tag":"FValueS","fvName":"exTag","fvValS":"Powset"}],"eBroughtBy":[]}],"rSplash":null,"rSes":"","rCurrentPage":null,"rLogin":null,"rEcho":null,"rProgress":null,"rDone":false}'
 
 
-    return final_json
+   
 
     return '{"rPages":[],"rExercises":[{"eTopic":"Powerset operations","eQuestion":[{"tag":"FText","contents":"Write the powerset 𝒫"},{"tag":"FMath","contents":"(\\\\left\\\\{9,6\\\\right\\\\})"},{"tag":"FText","contents":" in roster notation"},{"tag":"FFieldMath","contents":"roster"}],"eActions":[{"tag":"Check"}],"eHidden":[{"tag":"FValueS","fvName":"tag","fvValS":"ExerciseType"},{"tag":"FValue","fvName":"exId","fvVal":0},{"tag":"FValueS","fvName":"exTag","fvValS":"Powset"}],"eBroughtBy":[]}],"rSplash":null,"rSes":"","rCurrentPage":null,"rLogin":null,"rEcho":null,"rProgress":null,"rDone":false}'
     

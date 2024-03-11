@@ -10,18 +10,24 @@ app = Flask(__name__)
 def index():
     return render_template('single.html')
 
+stored = {}
+nextExerciseNr = 0
+
 @app.route('/~sjc/cs30/cs30.cgi', methods=['POST'])
 def serve_app():
+    
+    global stored, nextExerciseNr
     form_data = request.form
     ex_value = form_data.get('ex')
-    final_json = powset.calc_powset()
-    z = json.loads(final_json)
-    print(z)
+    
     if (ex_value):
-        new_content = z["rExercises"][0]['eQuestion'][1]['contents']
+        
+        json_data = json.loads(ex_value)
+        final_json = stored[json_data['exId']]
+        new_content = final_json["rExercises"][0]['eQuestion'][1]['contents']
         pattern = r'\d+'
         numbers = re.findall(pattern, new_content)
-        print(numbers)
+        #print(numbers)
 
         temp = '\\left\\{\\left\\{\\right\\}, \\left\\{x\\right\\}, \\left\\{y\\right\\}, \\left\\{x, y\\right\\}\\right\\}'
         for c in temp:
@@ -29,20 +35,22 @@ def serve_app():
                 temp = temp.replace(c, numbers[0])
             if c == 'y':
                 temp = temp.replace(c, numbers[1])
-
-        print(temp)        
-        json_data = json.loads(ex_value)
-        
+        print(final_json)
         roster_value = json_data['cValue']['roster']
         #print(roster_value)
         mydata = {'rPages': [], 'rExercises': [], 'rSplash': {'tag': 'SplashPR', 'contents': {'prOutcome': 'POIncorrect', 'prFeedback': [{'tag': 'FText', 'contents': 'In roster notation, '}, {'tag': 'FText', 'contents': 'the powerset 𝒫'}, {'tag': 'FMath', 'contents': new_content}, {'tag': 'FText', 'contents': ' is  '}, {'tag': 'FMath', 'contents': temp}, {'tag': 'FText', 'contents': 'Your answer was '}, {'tag': 'FMath', 'contents': str(roster_value)}], 'prTimeToRead': 9}}, 'rSes': '', 'rCurrentPage': None, 'rLogin': None, 'rEcho': None, 'rProgress': None, 'rDone': False}
         
         return json.dumps(mydata)
-        #print(form_data)
-        #print(ex_value)
-        #json_data = json.loads(ex_value)
+    else:
+        
+        final_json = powset.calc_powset(1)
+        
+        final_json["rExercises"][0]['eHidden'] += [{'tag': 'FValue', 'fvName': 'exId', 'fvVal': nextExerciseNr}]
+        
+        stored[nextExerciseNr] = final_json
+        nextExerciseNr += 1
     
-    return final_json
+    return json.dumps(final_json)
     #roster_value = json_data['cValue']['roster']
     #
     #

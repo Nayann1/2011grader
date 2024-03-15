@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request
 import json
 import re
+import sys
 import powset
+import ourfunctions
 app = Flask(__name__)
 
 
@@ -21,36 +23,66 @@ def serve_app():
     ex_value = form_data.get('ex')
     
     if (ex_value):
-        
         json_data = json.loads(ex_value)
-        final_json = stored[json_data['exId']]
-        new_content = final_json["rExercises"][0]['eQuestion'][1]['contents']
-        pattern = r'\d+'
-        numbers = re.findall(pattern, new_content)
-        #print(numbers)
+        numbers = stored[0][0]['value']
+        vars = stored[0][0]
+        final_json,lineno = stored[json_data['exId']]
+        print(stored[0][0])
+        # new_content = final_json["rExercises"][0]['eQuestion'][1]['contents']
+        # print(new_content)
+        # pattern = r'\d+'
+        # numbers = re.findall(pattern, new_content)
+        # #print(numbers)
 
         temp = '\\left\\{\\left\\{\\right\\}, \\left\\{x\\right\\}, \\left\\{y\\right\\}, \\left\\{x, y\\right\\}\\right\\}'
+        cts = '\\left\\{x,y\\right\\})'
+
         for c in temp:
             if c == 'x':
-                temp = temp.replace(c, numbers[0])
+                temp = temp.replace(c, str(numbers[0]))
+                cts = cts.replace(c, str(numbers[0]))
             if c == 'y':
-                temp = temp.replace(c, numbers[1])
-        print(final_json)
+                temp = temp.replace(c, str(numbers[1]))
+                cts = cts.replace(c, str(numbers[1]))
+
+        #{"cAction":{"tag":"Check"},"tag":"ExerciseType","exId":0,"exTag":"Powset","cValue":{"roster":"99"}}
         roster_value = json_data['cValue']['roster']
         #print(roster_value)
-        mydata = {'rPages': [], 'rExercises': [], 'rSplash': {'tag': 'SplashPR', 'contents': {'prOutcome': 'POIncorrect', 'prFeedback': [{'tag': 'FText', 'contents': 'In roster notation, '}, {'tag': 'FText', 'contents': 'the powerset 𝒫'}, {'tag': 'FMath', 'contents': new_content}, {'tag': 'FText', 'contents': ' is  '}, {'tag': 'FMath', 'contents': temp}, {'tag': 'FText', 'contents': 'Your answer was '}, {'tag': 'FMath', 'contents': str(roster_value)}], 'prTimeToRead': 9}}, 'rSes': '', 'rCurrentPage': None, 'rLogin': None, 'rEcho': None, 'rProgress': None, 'rDone': False}
-        
+        mydata = {'rPages': [], 'rExercises': [], 'rSplash': {'tag': 'SplashPR', 'contents': {'prOutcome': 'POIncorrect', 'prFeedback': [{'tag': 'FText', 'contents': 'In roster notation, '}, {'tag': 'FText', 'contents': 'the powerset 𝒫'}, {'tag': 'FMath', 'contents': cts}, {'tag': 'FText', 'contents': ' is  '}, {'tag': 'FMath', 'contents': temp}, {'tag': 'FText', 'contents': 'Your answer was '}, {'tag': 'FMath', 'contents': str(roster_value)}], 'prTimeToRead': 9}}, 'rSes': '', 'rCurrentPage': None, 'rLogin': None, 'rEcho': None, 'rProgress': None, 'rDone': False}
+        def get_response():
+            return roster_value
+        vars['get_response'] = get_response
+        vars['give_feedback'] = ourfunctions.give_feedback
+        with open('powset.n', 'r') as file:
+            content = '\n'.join(file.read().split('\n')[lineno:])
+        exec(content,None,vars)
         return json.dumps(mydata)
     else:
+        with open('powset.n', 'r') as file:
+                content = file.read()
+        curjson = {"rPages":[],"rExercises":[{"eTopic":None,"eQuestion":[],"eActions":[{"tag":"Check"}],"eHidden":[{"tag":"FValueS","fvName":"tag","fvValS":"ExerciseType"},{"tag":"FValue","fvName":"exId","fvVal":0},{"tag":"FValueS","fvName":"exTag","fvValS":"Powset"}],"eBroughtBy":[]}],"rSplash":None,"rSes":"","rCurrentPage":None,"rLogin":None,"rEcho":None,"rProgress":None,"rDone":False}
+        # {"tag":"FText","contents":"Write the powerset 𝒫"},{"tag":"FText","contents":" in roster notation"},{"tag":"FFieldMath","contents":"roster"}
+        vars = {}
+        vars['random_unique'] = ourfunctions.random_unique
+        def mj(txt,val):
+            print('mjcalled')
+            res = ourfunctions.make_json(txt,val,curjson)
+            newjson = res
+            return res
+        vars['write_to_exercise'] = mj
+        try:
+            exec(content, None, vars)
+        except NameError as e:
+             exc_type, exc_value, exc_traceback = sys.exc_info()
+             line = exc_traceback.tb_lineno
+             print(f'line no {line}')
+        curjson["rExercises"][0]['eHidden'] += [{'tag': 'FValue', 'fvName': 'exId', 'fvVal': nextExerciseNr}]
         
-        final_json = powset.calc_powset(1)
-        
-        final_json["rExercises"][0]['eHidden'] += [{'tag': 'FValue', 'fvName': 'exId', 'fvVal': nextExerciseNr}]
-        
-        stored[nextExerciseNr] = final_json
+        stored[nextExerciseNr] = (vars, line)
         nextExerciseNr += 1
+        newjson=curjson
     
-    return json.dumps(final_json)
+    return json.dumps(newjson)
     #roster_value = json_data['cValue']['roster']
     #
     #

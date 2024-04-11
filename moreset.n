@@ -4,25 +4,43 @@ max_value = min_value+10
 numfirst = 4
 numsecond = 3
 
-value1 = random_unique([min_value,max_value], numfirst)
-value2 = random_unique([min_value,max_value], numsecond)
- 
+#value1 = random_unique([min_value,max_value], numfirst)
+
+#ans = create_answer(value1)
+
+#temp = random_unique([min_value,max_value], numsecond-len(ans))
+#value2 = ans + temp
+
+value1, value2, ans = gen_sets(min_value, max_value, numfirst, numsecond)
+
+
+topic("More set operations")
+
 
 write_to_exercise("FText", "Write the set")
 write_to_exercise("FMath", value1)
 write_to_exercise("FMath", "\cap")
 write_to_exercise("FMath", value2)
-write_to_exercise("FText", "In roster notation")
+write_to_exercise("FText", "in roster notation")
 write_to_exercise("FFieldMath", "roster")
 contents = get_response()
 
+answer = new_get_set2(ans)
 
 
-add_to_feedback("FMath", contents)
 add_to_feedback("FText", "In roster notation, the set")
-add_to_feedback("FMath", value1)
-add_to_feedback("FMath", "\cap")
-add_to_feedback("FMath", value2)
-add_to_feedback("FText", "is")
-add_to_feedback("FText", "Your answer was" )
+add_to_feedback("FMath", new_get_set(value1, value2))
+add_to_feedback("FText", "is ")
+add_to_feedback("FMath", answer)
+add_to_feedback("FText", " Your answer was" )
 add_to_feedback("FMath", contents)
+
+print(contents)
+print(answer)
+
+if contents == answer:
+    add_to_feedback("FText", ". Well done! You were correct")
+    respond(True)
+else:
+    add_to_feedback("FText", ". Therefore you are wrong!")
+    respond(False) # incorrect

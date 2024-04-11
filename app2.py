@@ -3,42 +3,41 @@ import json
 import re
 import sys
 import powset
+
 import ourfunctions
 app = Flask(__name__)
 
 
-global_qtype = None
-
 @app.route('/')
 def index():
-    global global_qtype
-    global_qtype = request.args.get('qtype')
     return render_template('single.html')
-
-@app.route('/get_animal')
-def get_qtype():
-    global global_qtype
-    return global_qtype if global_qtype else 'Question type not set'
 
 stored = {}
 nextExerciseNr = 0
 
 @app.route('/~sjc/cs30/cs30.cgi', methods=['POST'])
 def serve_app():
+    
     global stored, nextExerciseNr
     form_data = request.form
-    question = get_qtype()
-    print(question)
     ex_value = form_data.get('ex')
     
-    q_string = question + '.n'
-
-    with open(q_string, 'r') as file:
+    with open('moreset.n', 'r') as file:
         content = file.read()
     if (ex_value):
         json_data = json.loads(ex_value)
         vars,lineno = stored[json_data['exId']]
+        #print('stored data:'+str(stored[0][0]))
+        # new_content = final_json["rExercises"][0]['eQuestion'][1]['contents']
+        # print(new_content)
+        # pattern = r'\d+'
+        # numbers = re.findall(pattern, new_content)
+        
 
+        
+
+
+        #{"cAction":{"tag":"Check"},"tag":"ExerciseType","exId":0,"exTag":"Powset","cValue":{"roster":"99"}}
         roster_value = json_data['cValue']['roster']
         #print(roster_value)
         mydata = {'rPages': [], 'rExercises': [], 'rSplash': {'tag': 'SplashPR', 'contents': {'prOutcome': 'POIncorrect', 'prFeedback': [], 'prTimeToRead': 9}}, 'rSes': '', 'rCurrentPage': None, 'rLogin': None, 'rEcho': None, 'rProgress': None, 'rDone': False}
@@ -54,8 +53,6 @@ def serve_app():
             return
         vars['get_response'] = get_response
         vars['add_to_feedback'] = fb
-        vars['get_set'] = ourfunctions.get_set
-        vars['get_set2'] = ourfunctions.get_set2
         vars['new_get_set'] = ourfunctions.new_get_set
         vars['new_get_set2'] = ourfunctions.new_get_set2
         vars['respond'] = respond
@@ -67,7 +64,8 @@ def serve_app():
         curjson = {"rPages":[],"rExercises":[{"eTopic": None,"eQuestion":[],"eActions":[{"tag":"Check"}],"eHidden":[{"tag":"FValueS","fvName":"tag","fvValS":"ExerciseType"},{"tag":"FValue","fvName":"exId","fvVal":0},{"tag":"FValueS","fvName":"exTag","fvValS":"Powset"}],"eBroughtBy":[]}],"rSplash":None,"rSes":"","rCurrentPage":None,"rLogin":None,"rEcho":None,"rProgress":None,"rDone":False}
         # {"tag":"FText","contents":"Write the powerset 𝒫"},{"tag":"FText","contents":" in roster notation"},{"tag":"FFieldMath","contents":"roster"}
         vars = {}
-        vars['random_unique'] = ourfunctions.random_unique
+        # vars['random_unique'] = ourfunctions.random_unique
+        # vars['create_answer'] = ourfunctions.create_answer
         vars['gen_sets'] = ourfunctions.gen_sets
         def mj(txt,val):
             #print('mjcalled')
@@ -112,6 +110,3 @@ def serve_app():
 if __name__ == "__main__":
     app.run(debug=True)
 
-
-    #return  '{"rPages":[{"pId":"Powset","pName":"L1.1 - Powerset operations"},{"pId":"SetOps","pName":"L1.2 - More set operations"},{"pId":"IncExcCardinalities","pName":"L1.3 - Inclusion exclusion principle"},{"pId":"multiplicitiesRelations","pName":"L2.1 - Multiplicities of relations"},{"pId":"LogicWrongStep","pName":"L3.2 - Logic: rewriting expressions (identify wrong steps)"},{"pId":"SetConversion","pName":"? - Conversion to set-builder notation"},{"pId":"ProbBasic","pName":"L11? - Basic Probability"},{"pId":"ProbaCompute","pName":"L14 - Probability : compute expression"},{"pId":"ProbExpect","pName":"L13? - Expected Value"},{"pId":"Cardinality","pName":"L12 - Cardinality of Expression"},{"pId":"GraphsGiveSet","pName":"L17 - Graph basics 1"},{"pId":"ModN","pName":"L25 - Modulo: True or False"},{"pId":"Roster","pName":"Optional - Roster notation"},{"pId":"LogicProofOrder","pName":"L3.2 - Logic: rewriting expressions"},{"pId":"LogicRewriting","pName":"L3.1 - Logic Rewriting"}],"rExercises":[],"rSplash":null,"rSes":"","rCurrentPage":null,"rLogin":"Single user mode","rEcho":null,"rProgress":null,"rDone":false}'
-    #return '{"rPages":[],"rExercises":[],"rSplash":{"tag":"SplashPR","contents":{"prOutcome":"POIncorrect","prFeedback":[{"tag":"FText","contents":"In roster notation, "},{"tag":"FText","contents":"the powerset 𝒫"},{"tag":"FMath","contents":"(\\left\\{0,1\\right\\})"},{"tag":"FText","contents":" is "},{"tag":"FMath","contents":"\\left\\{\\left\\{\\right\\}, \\left\\{0\\right\\}, \\left\\{1\\right\\}, \\left\\{0, 1\\right\\}\\right\\}"},{"tag":"FText","contents":"Your answer was "},{"tag":"FMath","contents":""}],"prTimeToRead":9}},"rSes":"","rCurrentPage":null,"rLogin":null,"rEcho":null,"rProgress":null,"rDone":false}'

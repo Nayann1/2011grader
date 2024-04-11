@@ -11,7 +11,7 @@ contents = get_response()
 
 
 answer = get_set(value[0], value[1])
-add_to_feedback("FText", " In roster notation ")
+add_to_feedback("FText", " in roster notation ")
 add_to_feedback("FText", "the powerset P")
 add_to_feedback("FMath", get_set2(value[0], value[1]))
 add_to_feedback("FText", "is")

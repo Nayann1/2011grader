@@ -256,7 +256,7 @@ def generate_proof(theorems, max_length=5):
 def stringRule(explanation,lhs,rhs):
     return Rule(lhs, rhs, (lambda lhs, rhs:explanation))
 def lnot(expr):
-    return Expression("\\lnot", [expr])
+    return Expression(" \\not ", [expr])
 def wedge(expr1,expr2):
     return Expression(" \\wedge ", [expr1,expr2])
 def vee(expr1,expr2):

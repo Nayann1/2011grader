@@ -4,6 +4,10 @@ import re
 import sys
 import powset
 import ourfunctions
+import proofgen
+import random
+from proofgen import Variable
+from proofgen import Expression
 app = Flask(__name__)
 
 
@@ -11,14 +15,14 @@ global_qtype = None
 
 @app.route('/')
 def index():
-    global global_qtype
-    global_qtype = request.args.get('qtype')
     return render_template('single.html')
 
 @app.route('/get_animal')
-def get_qtype():
-    global global_qtype
-    return global_qtype if global_qtype else 'Question type not set'
+def get_qtype(data):
+    try:
+        return data.split('?')[1].split('&')[0]
+    except IndexError:
+        return 'Question type not set'
 
 stored = {}
 nextExerciseNr = 0
@@ -27,23 +31,26 @@ nextExerciseNr = 0
 def serve_app():
     global stored, nextExerciseNr
     form_data = request.form
-    question = get_qtype()
-    print(question)
+    question = get_qtype(form_data['s'])
+    #print(question)
     ex_value = form_data.get('ex')
-    
     q_string = question + '.n'
 
     with open(q_string, 'r') as file:
         content = file.read()
     if (ex_value):
         json_data = json.loads(ex_value)
+        #print(json_data)
         vars,lineno = stored[json_data['exId']]
 
         roster_value = json_data['cValue']['roster']
         #print(roster_value)
         mydata = {'rPages': [], 'rExercises': [], 'rSplash': {'tag': 'SplashPR', 'contents': {'prOutcome': 'POIncorrect', 'prFeedback': [], 'prTimeToRead': 9}}, 'rSes': '', 'rCurrentPage': None, 'rLogin': None, 'rEcho': None, 'rProgress': None, 'rDone': False}
         def get_response():
-            return roster_value
+            if roster_value != None:
+                return roster_value
+            else:
+                return json_data['cValue']['proof']
         def fb(txt,val):
            
             res2 = ourfunctions.add_to_feedback(txt, val, mydata) 
@@ -51,7 +58,7 @@ def serve_app():
         def respond(bool):
             if bool:
                 mydata['rSplash']['contents']['prOutcome'] = 'POCorrect'
-            return
+            return 
         vars['get_response'] = get_response
         vars['add_to_feedback'] = fb
         vars['get_set'] = ourfunctions.get_set
@@ -59,29 +66,54 @@ def serve_app():
         vars['new_get_set'] = ourfunctions.new_get_set
         vars['new_get_set2'] = ourfunctions.new_get_set2
         vars['respond'] = respond
+        vars['check_proof_answer'] = ourfunctions.check_proof_answer
         content = '\n'.join(content.split('\n')[lineno:])
         #print('executing '+str(content))
         exec(content,None,vars)
         return json.dumps(mydata)
     else:
-        curjson = {"rPages":[],"rExercises":[{"eTopic": None,"eQuestion":[],"eActions":[{"tag":"Check"}],"eHidden":[{"tag":"FValueS","fvName":"tag","fvValS":"ExerciseType"},{"tag":"FValue","fvName":"exId","fvVal":0},{"tag":"FValueS","fvName":"exTag","fvValS":"Powset"}],"eBroughtBy":[]}],"rSplash":None,"rSes":"","rCurrentPage":None,"rLogin":None,"rEcho":None,"rProgress":None,"rDone":False}
+        #curjson = {"rPages":[],"rExercises":[{"eTopic": None,"eQuestion":[],"eActions":[{"tag":"Check"}],"eHidden":[{"tag":"FValueS","fvName":"tag","fvValS":"ExerciseType"},{"tag":"FValue","fvName":"exId","fvVal":0},{"tag":"FValueS","fvName":"exTag","fvValS":"Powset"}],"eBroughtBy":[]}],"rSplash":None,"rSes":"","rCurrentPage":None,"rLogin":None,"rEcho":None,"rProgress":None,"rDone":False}
+        curjson = {"rPages":[],"rExercises":[{"eTopic":"Logic: rewriting expressions","eQuestion":[],"eActions":[{"tag":"Check"}],"eHidden":[{"tag":"FValueS","fvName":"tag","fvValS":"ExerciseType"},{"tag":"FValue","fvName":"exId","fvVal":0},{"tag":"FValueS","fvName":"exTag","fvValS":"LogicProofOrder"}],"eBroughtBy":["Tyler","Fei"]}],"rSplash":None,"rSes":"","rCurrentPage":None,"rLogin":None,"rEcho":None,"rProgress":None,"rDone":False}
+        
         # {"tag":"FText","contents":"Write the powerset 𝒫"},{"tag":"FText","contents":" in roster notation"},{"tag":"FFieldMath","contents":"roster"}
         vars = {}
         vars['random_unique'] = ourfunctions.random_unique
         vars['gen_sets'] = ourfunctions.gen_sets
+        vars['generate_proof'] = proofgen.generate_proof
+        vars['stringRule'] = proofgen.stringRule
+        vars['vee'] = proofgen.vee
+        vars['lnot'] = proofgen.lnot
+        vars['wedge'] = proofgen.wedge
+        vars['Variable'] = Variable
+        vars['Expression'] = Expression
+        vars['form_json'] = ourfunctions.form_json
+        vars['form_logic_step'] = ourfunctions.form_logic_step
+        vars['create_steps'] = ourfunctions.create_steps
         def mj(txt,val):
             #print('mjcalled')
             res = ourfunctions.make_json(txt,val,curjson)
             return res
         
+        def aj(js):
+            res = ourfunctions.add_to_question(js,curjson)
+            
+            return res
+
+
         def tp(t):
             re = ourfunctions.topic(t, curjson)
             return re
 
         vars['write_to_exercise'] = mj
         vars['topic'] = tp
+        vars['add_to_question'] = aj
+        
         try:
+            
             exec(content, None, vars)
+            #
+            # print("HERE")
+            
         except NameError as e:
              exc_type, exc_value, exc_traceback = sys.exc_info()
              line = exc_traceback.tb_next.tb_lineno-1
@@ -91,7 +123,6 @@ def serve_app():
         stored[nextExerciseNr] = (vars, line)
         nextExerciseNr += 1
         newjson=curjson
-       
     return json.dumps(newjson)
     #roster_value = json_data['cValue']['roster']
     #

@@ -14,7 +14,6 @@ theorems = [
         stringRule("annihilation of or", vee(x,t),t),
     ]
 proof = generate_proof(theorems)
-print(proof.steps)
 step1 = str(proof.lhs)
 write_to_exercise("FText", "Here is an example proof, can you put it in the right order?")
 z = form_logic_step(step1)

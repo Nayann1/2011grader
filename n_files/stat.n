@@ -1,0 +1,33 @@
+dice_val = random.randint(2, 6)
+coins_val = random.randint(0, 2)
+
+
+
+topic("Stat")
+
+write_to_exercise("FText", "2 coins are flipped and 1 dice is rolled, what is the probability that the dice value is")
+write_to_exercise("FMath", "<")
+write_to_exercise("FMath", dice_val)
+write_to_exercise("FText", " and exactly ")
+write_to_exercise("FMath", coins_val)
+write_to_exercise("FText", " heads are flipped?")
+write_to_exercise("FFieldMath", "roster")
+
+
+contents = get_response()
+
+answer = get_prop(dice_val, coins_val)
+
+add_to_feedback("FText", " The answer is ")
+add_to_feedback("FMath", answer)
+add_to_feedback("FText", ". Your answer was ")
+add_to_feedback("FMath", contents)
+if fraction_to_decimal(contents) == str(answer):
+    add_to_feedback("FText", ". Well done! You were correct. ")
+    respond(True)
+else:
+    add_to_feedback("FText", ". Therefore you are wrong! Make sure you remember your probability rules. ")
+    respond(False) # incorrect
+score = get_total_score()
+add_to_feedback("FText", "Your total score up to now is ")
+add_to_feedback("FText", score)

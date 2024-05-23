@@ -15,12 +15,10 @@ def calc_powset(bol):
     vars['write_to_exercise'] = mj
     if bol == 1:
         vars['get_response'] = ourfunctions.get_response
-    
-
+        vars['give_feedback'] = ourfunctions.give_feedback
 
     exec(content, None, vars)
-
-    print(curjson)
+    
     return curjson
-calc_powset(1)
+#calc_powset(1)
 

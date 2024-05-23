@@ -1,0 +1,17 @@
+dice_val = random.randint(1, 6)
+coins_val = random.randint(0, 2)
+
+
+
+topic("Stat")
+
+write_to_exercise("FText", "2 coins are flipped and 1 dice is rolled, what is the probability that the dice value is")
+write_to_exercise("FMath", "U+2264")
+write_to_exercise("FMath", dice_val)
+write_to_exercise("FText", " and exactly ")
+write_to_exercise("FMath", coins_val)
+write_to_exercise("FText", " heads are flipped?")
+write_to_exercise("FFieldMath", "roster")
+
+contents = get_response()
+

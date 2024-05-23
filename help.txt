@@ -1,0 +1,49 @@
+{"rPages":[],"rExercises":[],"rSplash":{"tag":"SplashPR","contents":{"prOutcome":"POIncorrect","prFeedback":[{"tag":"FText","contents":"In roster notation, "},{"tag":"FText","contents":"the set "},{"tag":"FMath","contents":"\\left\\{1, 3, 7, 8, 9\\right\\} \\cap \\left\\{6, 7, 8, 9\\right\\}"},{"tag":"FText","contents":" is "},{"tag":"FMath","contents":"\\left\\{7, 8, 9\\right\\}"},{"tag":"FText","contents":"Your answer was "},{"tag":"FMath","contents":""}],"prTimeToRead":9}},"rSes":"","rCurrentPage":null,"rLogin":null,"rEcho":null,"rProgress":null,"rDone":false}
+{'rPages': [], 'rExercises': [], 'rSplash': {'tag': 'SplashPR', 'contents': {'prOutcome': 'POIncorrect', 'prFeedback': [], 'prTimeToRead': 9}}, 'rSes': '', 'rCurrentPage': None, 'rLogin': None, 'rEcho': None, 'rProgress': None, 'rDone': False}
+
+
+
+{"tag":"FText","contents":"Here is an example proof, can you put it in the right order?"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬(¬p ∧ (¬q ∨ r ∨ \\text{true}))"}]},{"tag":"FReorder","fvName":"proof","fClusters":[[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Negation of Negation"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"p"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Operation with true,false"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬(¬p ∧ (¬q ∨ \\text{true}))"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Operation with true,false"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬(¬p ∧ \\text{true})"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Operation with true,false"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬¬p"}]}]]}]
+
+
+
+
+{"tag":"FReorder","fvName":"proof","fClusters":[[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Negation of Negation"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"p"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Operation with true,false"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬(¬p ∧ (¬q ∨ \\text{true}))"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Operation with true,false"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬(¬p ∧ \\text{true})"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Operation with true,false"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬¬p"}]}]]}]
+{'tag': 'FIndented', 'fIndentation': 1, 'fContent': [{'tag': 'FMath', 'contents': '¬(¬p ∧ (¬q ∨ r ∨ \\text{true}))'}]}
+
+
+[{'tag': 'FMath', 'contents': '='}, {'tag': 'FText', 'contents': 'identity of and'}, {'tag': 'FIndented', 'fIndentation': 1, 'fContent': [{'tag': 'FText', 'contents': '(x \\wedge T) = x'}]}]
+
+{"pId":"Powset","pName":"L1.1 - Powerset operations"}
+'{"rPages":[],"rExercises":[],"rSplash":null,"rSes":"","rCurrentPage":null,"rLogin":"Single user mode","rEcho":null,"rProgress":null,"rDone":false}'
+
+
+
+
+
+
+
+{'rPages': [], 'rExercises': [{'eTopic': 'More set operations', 'eQuestion': [{'tag': 'FText', 'contents': 'Write the set'}, {'tag': 'FMath', 'contents': '\\left\\{{8, 10, 11, 5}\\right\\}'}, {'tag': 'FMath', 'contents': '\\cap'}, {'tag': 'FMath', 'contents': '\\left\\{{8, 10, 5}\\right\\}'}, {'tag': 'FText', 'contents': 'in roster notation'}, {'tag': 'FFieldMath', 'contents': 'roster'}], 'eActions': [{'tag': 'Check'}], 'eHidden': [{'tag': 'FValueS', 'fvName': 'tag', 'fvValS': 'ExerciseType'}, {'tag': 'FValue', 'fvName': 'exId', 'fvVal': 0}, {'tag': 'FValueS', 'fvName': 'exTag', 'fvValS': 'LogicProofOrder'}, {'tag': 'FValue', 'fvName': 'exId', 'fvVal': 0}], 'eBroughtBy': ['Tyler', 'Fei']}], 'rSplash': None, 'rSes': '', 'rCurrentPage': None, 'rLogin': None, 'rEcho': None, 'rProgress': None, 'rDone': False}
+
+
+
+
+
+
+
+
+
+{'rPages': [], 'rExercises': [{'eTopic': 'Powerset operations', 'eQuestion': [{'tag': 'FText', 'contents': 'Write the powerset P'}, {'tag': 'FMath', 'contents': '\\left\\{{9, 10}\\right\\}'}, {'tag': 'FText', 'contents': 'In roster notation'}, {'tag': 'FFieldMath', 'contents': 'roster'}], 'eActions': [{'tag': 'Check'}], 'eHidden': [{'tag': 'FValueS', 'fvName': 'tag', 'fvValS': 'ExerciseType'}, {'tag': 'FValue', 'fvName': 'exId', 'fvVal': 0}, {'tag': 'FValueS', 'fvName': 'exTag', 'fvValS': 'LogicProofOrder'}, {'tag': 'FValue', 'fvName': 'exId', 'fvVal': 0}], 'eBroughtBy': ['Tyler', 'Fei']}], 'rSplash': None, 'rSes': '', 'rCurrentPage': None, 'rLogin': None, 'rEcho': None, 'rProgress': None, 'rDone': False}
+{'rPages': [], 'rExercises': [{'eTopic': 'Powerset operations', 'eQuestion': [{'tag': 'FText', 'contents': 'Write the powerset P'}, {'tag': 'FMath', 'contents': '\\left\\{{4, 2}\\right\\}'}, {'tag': 'FText', 'contents': 'In roster notation'}, {'tag': 'FFieldMath', 'contents': 'roster'}], 'eActions': [{'tag': 'Check'}], 'eHidden': [{'tag': 'FValueS', 'fvName': 'tag', 'fvValS': 'ExerciseType'}, {'tag': 'FValue', 'fvName': 'exId', 'fvVal': 0}, {'tag': 'FValueS', 'fvName': 'exTag', 'fvValS': 'LogicProofOrder'}, {'tag': 'FValue', 'fvName': 'exId', 'fvVal': 1}], 'eBroughtBy': ['Tyler', 'Fei']}], 'rSplash': None, 'rSes': '', 'rCurrentPage': None, 'rLogin': None, 'rEcho': None, 'rProgress': None, 'rDone': False}
+
+
+
+{"rPages":[],"rExercises":[{"eTopic":"Powerset operations","eQuestion":[{"tag":"FText","contents":"Write "},{"tag":"FText","contents":"the powerset 𝒫"},{"tag":"FMath","contents":"(\\left\\{0,4\\right\\})"},{"tag":"FText","contents":" in roster notation"},{"tag":"FFieldMath","contents":"roster"}],"eActions":[{"tag":"Check"}],"eHidden":[{"tag":"FValueS","fvName":"tag","fvValS":"ExerciseType"},{"tag":"FValue","fvName":"exId","fvVal":0},{"tag":"FValueS","fvName":"exTag","fvValS":"Powset"}],"eBroughtBy":[]}],"rSplash":null,"rSes":"","rCurrentPage":null,"rLogin":null,"rEcho":null,"rProgress":null,"rDone":false}
+{"rPages":[],"rExercises":[{"eTopic":"Logic: rewriting expressions","eQuestion":[{"tag":"FText","contents":"Here is an example proof, can you put it in the right order?"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬(r ∨ ((\\text{false} ⇒ p) ⇒ q))"}]},{"tag":"FReorder","fvName":"proof","fClusters":[[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"DeMorgan's Law"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬r ∧ ¬¬(¬\\text{false} ∨ p) ∧ ¬q"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"DeMorgan's Law"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬r ∧ ¬(¬(¬\\text{false} ∨ p) ∨ q)"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Negation of Negation"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬r ∧ (¬\\text{false} ∨ p) ∧ ¬q"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Implications as an OR"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬(r ∨ ¬(¬\\text{false} ∨ p) ∨ q)"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Operation with true,false"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬r ∧ \\text{true} ∧ ¬q"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Implications as an OR"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬(r ∨ ¬(\\text{false} ⇒ p) ∨ q)"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Complement Law"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬r ∧ (\\text{true} ∨ p) ∧ ¬q"}]}],[{"tag":"FMath","contents":"="},{"tag":"FText","contents":"Operation with true,false"},{"tag":"FIndented","fIndentation":1,"fContent":[{"tag":"FMath","contents":"¬r ∧ ¬q"}]}]]}],"eActions":[{"tag":"Check"}],"eHidden":[{"tag":"FValueS","fvName":"tag","fvValS":"ExerciseType"},{"tag":"FValue","fvName":"exId","fvVal":0},{"tag":"FValueS","fvName":"exTag","fvValS":"LogicProofOrder"}],"eBroughtBy":["Tyler","Fei"]}],"rSplash":null,"rSes":"","rCurrentPage":null,"rLogin":null,"rEcho":null,"rProgress":null,"rDone":false}
+
+
+
+
+
+{"rPages": [], "rExercises": [{"eTopic": "Kinematics", "eQuestion": [{"tag": "FText", "contents": "A plane has a takeoff speed of "}, {"tag": "FText", "contents": "123.92"}, {"tag": "FText", "contents": " m\\s and requires "}, {"tag": "FText", "contents": "1155"}, {"tag": "FText", "contents": " m to reach that speed. Determine the acceleration of the plane and the time required to reach this speed."}], "eActions": [{"tag": "Check"}], "eHidden": [{"tag": "FValueS", "fvName": "tag", "fvValS": "ExerciseType"}, {"tag": "FValue", "fvName": "exId", "fvVal": 0}, {"tag": "FValueS", "fvName": "exTag", "fvValS": "LogicProofOrder"}, {"tag": "FValue", "fvName": "exId", "fvVal": 1}], "eBroughtBy": ["Tyler", "Fei"]}], "rSplash": null, "rSes": "", "rCurrentPage": null, "rLogin": null, "rEcho": "p_value", "rProgress": null, "rDone": false}
+curjson = {"rPages":[],"rExercises":[{"eTopic":"Expected Value","eQuestion":[{"tag":"FText","contents":"If "},{"tag":"FText","contents":"you invest in a stock that will return $140 with probability 0.2 or $80 with probability 0.8, what is your expected return?"},{"tag":"FFieldMath","contents":"prob"},{"tag":"FText","contents":"\nYou may give your answer as an unsimplified expression."}],"eActions":[{"tag":"Check"}],"eHidden":[{"tag":"FValueS","fvName":"tag","fvValS":"ExerciseType"},{"tag":"FValue","fvName":"exId","fvVal":0},{"tag":"FValueS","fvName":"exTag","fvValS":"ProbExpect"}],"eBroughtBy":["Fei Guo","Kyle Bensink"]}],"rSplash":None,"rSes":"","rCurrentPage":None,"rLogin":None,"rEcho":None,"rProgress":None,"rDone":None}
